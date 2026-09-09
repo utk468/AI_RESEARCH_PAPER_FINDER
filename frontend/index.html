@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Research Paper Finder — Discover, analyze, and summarize academic papers using AI-powered LangGraph pipeline." />
+  <meta property="og:title" content="AI Research Paper Finder" />
+  <meta property="og:description" content="Find and analyze research papers using advanced AI." />
+  <title>AI Research Paper Finder</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/components.css?v=2" />
+  <link rel="stylesheet" href="css/home.css?v=2" />
+  <link rel="stylesheet" href="css/responsive.css?v=2" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+</head>
+<body>
+
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand" aria-label="AI Research Paper Finder Home">
+          <span class="brand-name">Research<span>AI</span></span>
+        </a>
+
+        <nav class="navbar-nav">
+          <a href="index.html" class="nav-link active" id="nav-home">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            <span>Home</span>
+          </a>
+          <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+            <i class="fa-solid fa-chart-bar" aria-hidden="true"></i>
+            <span>Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </nav>
+
+    <main id="main-content">
+      <section class="hero-section" aria-label="Search for research papers">
+
+        <h1 class="hero-title">
+          <span class="line1">Discover Research</span>
+          <span class="line2">Powered by AI</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Enter a natural language query to find, analyze, and summarize academic papers
+          from arXiv, IEEE, ACM, Springer, and more — in seconds.
+        </p>
+
+        <div class="hero-search-container">
+          <form id="search-form" role="search" aria-label="Research paper search">
+            <div class="hero-search-box" id="hero-search-box">
+              <span class="hero-search-icon" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+              <input
+                type="text"
+                id="search-input"
+                class="hero-search-input"
+                placeholder="e.g. multimodal RAG in healthcare, vision transformers 2024..."
+                autocomplete="off"
+                aria-label="Research query"
+                maxlength="500"
+              />
+              <button type="submit" class="hero-search-btn" id="search-btn" aria-label="Search papers">
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                Search
+              </button>
+            </div>
+          </form>
+
+          <div class="search-suggestions" role="list" aria-label="Example queries">
+            <button class="suggestion-chip" role="listitem" onclick="fillQuery(this)">Multimodal RAG in healthcare</button>
+            <button class="suggestion-chip" role="listitem" onclick="fillQuery(this)">Vision Language Models 2024</button>
+            <button class="suggestion-chip" role="listitem" onclick="fillQuery(this)">LLM reasoning benchmarks</button>
+            <button class="suggestion-chip" role="listitem" onclick="fillQuery(this)">Graph Neural Networks drug discovery</button>
+            <button class="suggestion-chip" role="listitem" onclick="fillQuery(this)">Diffusion models image generation</button>
+          </div>
+        </div>
+
+        <div class="recent-section" id="recent-section" aria-label="Recent searches" style="display:none">
+          <div class="recent-section-title">
+            <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+            Recent Searches
+          </div>
+          <div class="recent-list" id="recent-list" role="list"></div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

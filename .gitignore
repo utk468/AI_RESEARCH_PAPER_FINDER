@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+pip-log.txt
+
+# Environment
+.env
+*.env
+.env.example
+
+# Logs
+logs/
+*.log
+
+# Storage
+storage/
+*.faiss
+*.meta.pkl
+
+
+

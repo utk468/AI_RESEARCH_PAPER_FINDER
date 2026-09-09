@@ -1,0 +1,167 @@
+@media (max-width: 1280px) {
+  :root { --sidebar-w: 240px; }
+
+  .hero-search-box { padding: var(--space-3) var(--space-4); }
+  .paper-hero-title { font-size: 1.75rem; }
+}
+
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 220px; }
+
+  .navbar-inner { gap: var(--space-4); }
+  .navbar-search { max-width: 340px; }
+
+  .brand-name { font-size: 1rem; }
+
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .filter-panel {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .paper-hero-title { font-size: 1.5rem; }
+  .gap-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  :root { --header-h: 60px; }
+
+  .navbar-search { display: none; }
+
+  .navbar-inner { gap: var(--space-3); }
+  .brand-name { display: none; }
+
+  .nav-link span { display: none; }
+  .nav-link { padding: var(--space-2); border-radius: var(--radius-md); }
+
+  .hero-section { padding: var(--space-12) var(--space-4); }
+  .hero-title   { font-size: 2rem !important; }
+  .hero-subtitle { font-size: 1rem !important; }
+
+  .hero-search-box { flex-wrap: wrap; gap: var(--space-2); }
+  .hero-search-btn { width: 100%; justify-content: center; }
+
+  .dashboard-content { padding: var(--space-4); }
+  .sort-bar { flex-direction: column; align-items: flex-start; }
+
+  .paper-card { padding: var(--space-4); }
+  .paper-card-title { font-size: 0.95rem; }
+
+  .paper-card-footer { flex-direction: column; align-items: flex-start; }
+  .paper-card-actions { flex-wrap: wrap; }
+
+  .summary-panel-header { padding: var(--space-4); }
+  .summary-panel-body { padding: var(--space-4); }
+  .gap-panel { padding: var(--space-4); }
+  .gap-grid { grid-template-columns: 1fr; }
+
+  .chat-panel { height: 420px; }
+  .chat-bubble { max-width: 90%; }
+
+  .paper-hero { padding: var(--space-8) 0; }
+  .paper-hero-title { font-size: 1.35rem; }
+
+  .paper-detail-layout { flex-direction: column; }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .tabs { overflow-x: auto; }
+  .tab-btn { font-size: 0.75rem; padding: var(--space-2) var(--space-3); }
+
+  .toast-container {
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+  .toast { min-width: unset; max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 var(--space-4); }
+
+  .hero-title { font-size: 1.6rem !important; }
+  .section-title { font-size: 1.2rem; }
+
+  .hero-search-box {
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-search-input { font-size: 0.9rem; }
+
+  .paper-card { border-radius: var(--radius-lg); }
+  .paper-card-title { font-size: 0.9rem; }
+  .paper-card-abstract { -webkit-line-clamp: 2; }
+
+  .paper-action-btn { padding: 4px 8px; font-size: 0.7rem; }
+
+  .loading-progress { width: 260px; }
+  .loading-title { font-size: 1rem; }
+
+  .stat-value { font-size: 1.4rem; }
+
+  .stats-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--space-3) !important;
+  }
+
+  .suggestion-chip {
+    font-size: 0.72rem;
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .meta-table td:first-child { width: 100px; }
+
+  .chat-panel { height: 380px; }
+  .chat-messages { padding: var(--space-3); }
+  .chat-input-area { padding: var(--space-3); }
+  .chat-bubble { max-width: 95%; font-size: 0.825rem; }
+
+  .rec-grid { grid-template-columns: 1fr; }
+  .pipeline-steps { gap: var(--space-1); }
+
+  .paper-hero-title { font-size: 1.15rem; }
+  .paper-hero-authors { font-size: 0.85rem; }
+
+  .tabs { gap: 2px; }
+  .tab-btn { flex: none; padding: var(--space-2); font-size: 0.72rem; }
+}
+
+@media print {
+  .navbar, .sidebar, .chat-panel, .toast-container,
+  .btn-primary, .hero-search-wrapper, .bg-mesh,
+  .loading-overlay { display: none !important; }
+
+  body { background: white; color: black; }
+
+  .paper-card {
+    border: 1px solid #ddd;
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .paper-card-title { color: #1a1a2e; }
+  .paper-card-abstract { color: #444; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .bg-orb { animation: none; }
+  .spinner { animation: spin 2s linear infinite; }
+}

@@ -1,0 +1,75 @@
+[
+  {
+    "_collection": "papers",
+    "paper_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+    "url": "https://arxiv.org/abs/2404.01234",
+    "title": "MultiModal-RAG: Retrieval-Augmented Generation for Medical Imaging with Vision-Language Models",
+    "authors": ["Alice Zhang", "Bob Kumar", "Carol Smith"],
+    "year": 2024,
+    "publisher": "arXiv",
+    "conference": "NeurIPS 2024",
+    "doi": "10.48550/arXiv.2404.01234",
+    "abstract": "We present MultiModal-RAG, a framework for retrieval-augmented generation applied to medical imaging tasks. Our approach combines CLIP-based visual encoders with large language models to provide grounded, evidence-based responses to clinical queries. Experiments on three benchmark datasets demonstrate state-of-the-art performance with reduced hallucination rates.",
+    "keywords": ["multimodal", "RAG", "medical imaging", "vision-language models", "LLM", "healthcare"],
+    "citation_count": 142,
+    "license": "Apache 2.0",
+    "github_url": "https://github.com/example/multimodal-rag",
+    "dataset": "MIMIC-CXR, VQA-RAD, PathVQA",
+    "pdf_url": "https://arxiv.org/pdf/2404.01234.pdf",
+    "thumbnail": null,
+    "source": "tavily",
+    "similarity_score": 0.92,
+    "is_pdf_downloaded": true,
+    "is_embedded": true,
+    "summary": {
+      "summary_100_words": "MultiModal-RAG introduces a novel retrieval-augmented generation framework for medical imaging. The system combines CLIP encoders for visual feature extraction with large language models for generating grounded clinical responses. A cross-modal retrieval mechanism ensures that generated answers are grounded in retrieved visual and textual evidence, minimizing hallucinations. The framework is evaluated on MIMIC-CXR, VQA-RAD, and PathVQA, achieving state-of-the-art performance across all benchmarks.",
+      "methodology": "Cross-modal retrieval using CLIP visual embeddings and FAISS index, followed by LLM generation conditioned on top-K retrieved evidence.",
+      "architecture": "CLIP visual encoder → FAISS retrieval → LLM (GPT-4V) → grounded answer generation",
+      "dataset": "MIMIC-CXR, VQA-RAD, PathVQA",
+      "experiments": "Compared against UniVLP, MedPaLM-2, and GPT-4V baselines on VQA accuracy and factuality metrics.",
+      "results": "94.3% VQA accuracy on VQA-RAD, 17% reduction in hallucination rate vs GPT-4V baseline.",
+      "strengths": ["Grounded generation reduces hallucinations", "Supports multi-image queries", "Clinically interpretable"],
+      "weaknesses": ["High inference latency", "Requires pre-indexed medical corpus"],
+      "limitations": ["Only validated on English-language clinical notes", "Imaging modalities limited to radiology"],
+      "future_work": ["Extend to pathology slides", "Real-time inference optimization"],
+      "applications": ["Clinical decision support", "Radiology report generation", "Medical education"],
+      "key_contributions": ["First RAG framework for medical VQA", "Novel cross-modal retrieval mechanism", "Open-source code and pre-trained models"]
+    },
+    "created_at": "2024-06-01T10:00:00Z",
+    "updated_at": "2024-06-01T10:00:00Z"
+  },
+  {
+    "_collection": "search_history",
+    "search_id": "f1e2d3c4b5a6f1e2d3c4b5a6",
+    "query": "multimodal RAG in healthcare",
+    "understanding": {
+      "research_topic": "Multimodal Retrieval-Augmented Generation in Healthcare",
+      "subtopics": ["Medical Visual Question Answering", "Clinical NLP", "Vision-Language Models"],
+      "keywords": ["multimodal RAG", "healthcare AI", "medical imaging", "VLM", "clinical LLM"],
+      "publication_year_range": {"from": 2022, "to": 2024},
+      "conferences": ["NeurIPS", "MICCAI", "EMNLP"],
+      "paper_type": "empirical",
+      "search_intent": "find latest",
+      "domain": "medicine"
+    },
+    "paper_ids": ["a1b2c3d4e5f6a1b2c3d4e5f6"],
+    "total_results": 1,
+    "created_at": "2024-06-01T10:00:00Z"
+  },
+  {
+    "_collection": "embeddings",
+    "chunk_id": "a1b2c3d4e5f6a1b2c3d4e5f6_0_ab12cd34",
+    "paper_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+    "faiss_id": 0,
+    "chunk_text": "We present MultiModal-RAG, a framework for retrieval-augmented generation applied to medical imaging tasks. Our approach combines CLIP-based visual encoders with large language models to provide grounded, evidence-based responses to clinical queries.",
+    "chunk_index": 0,
+    "created_at": "2024-06-01T10:00:00Z"
+  },
+  {
+    "_collection": "feedback",
+    "paper_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+    "rating": 5,
+    "comment": "Excellent paper, very relevant to my research!",
+    "created_at": "2024-06-01T12:00:00Z"
+  }
+]

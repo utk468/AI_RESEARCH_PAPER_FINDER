@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="AI Research Paper Finder Dashboard — Browse, filter, and analyze your research results." />
+  <title>Dashboard — AI Research Paper Finder</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
+  <link rel="stylesheet" href="css/components.css?v=3" />
+  <link rel="stylesheet" href="css/dashboard.css?v=3" />
+  <link rel="stylesheet" href="css/responsive.css?v=3" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand" aria-label="Go to home">
+          <span class="brand-name">Research<span>AI</span></span>
+        </a>
+
+        <div class="navbar-search">
+          <form id="mini-search-form" role="search" aria-label="Quick search">
+            <div class="mini-search">
+              <span class="mini-search-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input id="mini-search-input" type="text" placeholder="New search..." autocomplete="off"
+                aria-label="Quick search" />
+              <button type="submit" class="mini-search-btn" aria-label="Search">Search</button>
+            </div>
+          </form>
+        </div>
+
+        <nav class="navbar-nav">
+          <a href="index.html" class="nav-link" id="nav-home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+          <a href="dashboard.html" class="nav-link active" id="nav-dash"><i
+              class="fa-solid fa-chart-bar"></i><span>Dashboard</span></a>
+        </nav>
+      </div>
+    </nav>
+
+    <div class="dashboard-top" id="dashboard-top">
+      <div class="dashboard-top-inner">
+        <div class="dashboard-meta-row">
+          <div class="query-display">
+            <span class="query-display-icon" aria-hidden="true"><i
+                class="fa-solid fa-magnifying-glass-chart"></i></span>
+            <h1 class="query-display-text" id="query-display-text">Loading results...</h1>
+          </div>
+          <div style="display:flex;gap:var(--space-3);align-items:center">
+            <span class="badge badge-purple" id="processing-time-badge" aria-label="Processing time"
+              style="display:none"></span>
+            <button class="btn-export" onclick="exportResults()" aria-label="Export results">
+              <i class="fa-solid fa-download" aria-hidden="true"></i>
+              <span>Export JSON</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="understanding-chips" id="understanding-chips" role="list" aria-label="Extracted keywords"></div>
+
+        <div class="dashboard-stats-strip" id="stats-strip" role="region" aria-label="Search statistics">
+          <div class="strip-stat"><span class="strip-stat-value" id="stat-total">0</span><span
+              class="strip-stat-label">Papers Found</span></div>
+          <div class="strip-stat"><span class="strip-stat-value" id="stat-pdfs">0</span><span
+              class="strip-stat-label">PDFs Ready</span></div>
+          <div class="strip-stat"><span class="strip-stat-value" id="stat-citations">100%</span><span
+              class="strip-stat-label">Author Abstracts</span></div>
+          <div class="strip-stat"><span class="strip-stat-value" id="stat-summaries">Groq AI</span><span
+              class="strip-stat-label">LLM Pipeline</span></div>
+        </div>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <div class="dashboard-layout">
+
+        <aside class="sidebar" aria-label="Filters and pipeline">
+          <div class="sidebar-sticky">
+
+            <div class="pipeline-card" aria-label="Pipeline progress" id="pipeline-card">
+              <div class="filter-title" style="margin-bottom:var(--space-3)">
+                <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+                AI Pipeline
+              </div>
+              <div class="pipeline-steps" id="pipeline-steps" role="list"></div>
+            </div>
+
+            <div class="filter-panel" aria-label="Search filters" id="filter-panel">
+              <div class="filter-title">
+                <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                Filters
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-group-label">Sort By</div>
+                <select class="sort-select" id="sort-select" aria-label="Sort papers by" style="width:100%">
+                  <option value="score">Relevance Score</option>
+                  <option value="year_desc">Year (Newest)</option>
+                  <option value="year_asc">Year (Oldest)</option>
+                  <option value="citations">Citation Count</option>
+                  <option value="title">Title A–Z</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-group-label">Year Range</div>
+                <div style="display:flex;gap:var(--space-2);align-items:center">
+                  <input type="number" class="input" id="filter-year-from" placeholder="From" min="1990" max="2030"
+                    aria-label="From year" style="width:80px;padding:var(--space-2) var(--space-3)" />
+                  <span style="color:var(--text-muted);font-size:0.8rem">–</span>
+                  <input type="number" class="input" id="filter-year-to" placeholder="To" min="1990" max="2030"
+                    aria-label="To year" style="width:80px;padding:var(--space-2) var(--space-3)" />
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-group-label">Sources</div>
+                <div class="source-chips" role="group" aria-label="Filter by source">
+                  <button type="button" class="source-chip" data-value="arxiv"
+                    onclick="toggleSourceChip(this)">arXiv</button>
+                  <button type="button" class="source-chip" data-value="ieee" onclick="toggleSourceChip(this)">IEEE
+                    Xplore</button>
+                  <button type="button" class="source-chip" data-value="acm" onclick="toggleSourceChip(this)">ACM
+                    DL</button>
+                  <button type="button" class="source-chip" data-value="springer"
+                    onclick="toggleSourceChip(this)">Springer</button>
+                  <button type="button" class="source-chip" data-value="semantic"
+                    onclick="toggleSourceChip(this)">Semantic Scholar</button>
+                </div>
+              </div>
+
+              <button class="btn btn-secondary w-full" onclick="applyFilters()" id="apply-filters-btn"
+                style="width:100%" aria-label="Apply filters">
+                <i class="fa-solid fa-filter" aria-hidden="true"></i> Apply Filters
+              </button>
+            </div>
+
+          </div>
+        </aside>
+
+        <div class="dashboard-main">
+
+          <div class="sort-bar" id="sort-bar">
+            <div class="results-count">
+              Showing <span id="results-showing">0</span> of <span id="results-total">0</span> papers
+            </div>
+            <div class="view-toggle-group" role="radiogroup" aria-label="Layout view switcher">
+              <button class="view-toggle-btn active" onclick="toggleView('list')" id="view-list" title="List view"
+                aria-label="List view" role="radio" aria-checked="true">
+                <i class="fa-solid fa-list" aria-hidden="true"></i>
+              </button>
+              <button class="view-toggle-btn" onclick="toggleView('grid')" id="view-grid" title="Grid view"
+                aria-label="Grid view" role="radio" aria-checked="false">
+                <i class="fa-solid fa-grip" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="papers-panel" id="panel-papers">
+
+            <div id="papers-skeleton" class="papers-grid">
+              <div style="height:200px" class="skeleton card"></div>
+              <div style="height:200px" class="skeleton card"></div>
+              <div style="height:200px" class="skeleton card"></div>
+            </div>
+
+            <div id="papers-list" class="papers-grid" style="display:none" role="list" aria-label="Research papers">
+            </div>
+
+            <div id="papers-empty" class="empty-state-card" style="display:none" aria-live="polite">
+              <div class="empty-state-icon-wrapper" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <div class="empty-state-title">No papers found</div>
+              <div class="empty-state-desc">We couldn't find any papers matching your current search query or applied
+                filters. Try broadening your terms or clearing active filters.</div>
+              <div class="empty-state-actions">
+                <button class="btn btn-secondary btn-sm" onclick="resetFilters()" aria-label="Reset all filters">
+                  <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset Filters
+                </button>
+                <a href="index.html" class="btn btn-primary btn-sm" aria-label="Start new search">
+                  <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> New Search
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="loading-overlay" id="loading-overlay" style="display:none" role="status" aria-live="polite"
+    aria-label="Processing research query">
+    <div class="loading-overlay-content">
+      <div class="loading-logo" aria-hidden="true">🔬</div>
+      <div class="loading-title">Running AI Pipeline</div>
+      <div class="loading-status" id="loading-status">Initializing...</div>
+      <div class="loading-progress">
+        <div class="progress-bar" aria-label="Pipeline progress">
+          <div class="progress-fill" id="loading-progress-fill" style="width:5%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
