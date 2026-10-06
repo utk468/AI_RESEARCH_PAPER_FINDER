@@ -1,4 +1,4 @@
-const BASE_URL = window.RESEARCH_API_URL || 'http://localhost:8000/api';
+const BASE_URL = window.RESEARCH_API_URL || '/api';
 
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;

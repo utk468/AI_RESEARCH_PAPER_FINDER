@@ -84,16 +84,18 @@ app.include_router(chat.router, prefix="/api")
 app.include_router(bookmarks.router, prefix="/api")
 app.include_router(feedback.router, prefix="/api")
 
-import os
-os.makedirs("storage/pdfs", exist_ok=True)
-app.mount("/storage", StaticFiles(directory="storage"), name="storage")
-app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
-
-@app.get("/", include_in_schema=False)
-async def root():
+@app.get("/api/info", include_in_schema=False)
+async def api_info():
     return {
         "app": settings.APP_NAME,
         "version": settings.APP_VERSION,
         "docs": "/docs",
         "health": "/health",
     }
+
+import os
+os.makedirs("storage/pdfs", exist_ok=True)
+app.mount("/storage", StaticFiles(directory="storage"), name="storage")
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
+app.mount("/", StaticFiles(directory="frontend", html=True), name="static_root")
+

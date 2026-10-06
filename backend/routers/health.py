@@ -13,11 +13,8 @@ from backend.config import settings
 
 router = APIRouter(tags=["Health"])
 
-@router.get(
-    "/health",
-    response_model=HealthResponse,
-    summary="Application health check",
-)
+@router.get("/health", response_model=HealthResponse, summary="Application health check")
+@router.get("/api/health", response_model=HealthResponse, include_in_schema=False)
 async def health_check():
     """Return system health status including MongoDB connectivity."""
 
