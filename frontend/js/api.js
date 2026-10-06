@@ -1,4 +1,4 @@
-const BASE_URL = window.RESEARCH_API_URL || '/api';
+const BASE_URL = window.RESEARCH_API_URL || 'http://localhost:8000/api';
 
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
@@ -81,5 +81,5 @@ const API = {
       body: JSON.stringify({ paper_id: paperId, rating, comment }),
     }),
 
-  health: () => fetch('/health').then(r => r.json()),
+  health: () => apiFetch('/health'.replace('/api', ''), { headers: {} }),
 };

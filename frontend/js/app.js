@@ -80,7 +80,7 @@ function loadRecentSearches() {
 
 async function fetchHealthStats() {
   try {
-    const health = await API.health();
+    const health = await fetch('http://localhost:8000/health').then(r => r.json());
 
     const vectors = document.getElementById('stat-vectors');
     if (vectors) vectors.textContent = formatNumber(health.faiss_vectors || 0);
