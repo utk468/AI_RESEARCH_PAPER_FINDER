@@ -81,5 +81,5 @@ const API = {
       body: JSON.stringify({ paper_id: paperId, rating, comment }),
     }),
 
-  health: () => apiFetch('/health'.replace('/api', ''), { headers: {} }),
+  health: () => fetch('/health').then(r => r.json()),
 };
